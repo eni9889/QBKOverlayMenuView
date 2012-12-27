@@ -79,6 +79,8 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
     if (self) {
         if (!_position) _position = kQBKOverlayMenuViewPositionDefault;
         _unfolded = NO;
+        
+        self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
     }
     
     return self;
@@ -130,10 +132,10 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
     }
     
     // Notificación con información adjunta (index del botón pulsado)
-    NSDictionary *info = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[_additionalButtons indexOfObject:sender]] 
+    NSDictionary *info = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[_additionalButtons indexOfObject:sender]]
                                                      forKey:QBKButtonIndexKey];
-    [[NSNotificationCenter defaultCenter] postNotificationName:QBKOverlayMenuDidActivateAdditionalButtonNotification 
-                                                        object:self 
+    [[NSNotificationCenter defaultCenter] postNotificationName:QBKOverlayMenuDidActivateAdditionalButtonNotification
+                                                        object:self
                                                       userInfo:info];
 }
 
@@ -158,8 +160,8 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
         }
         
         // Notificación
-        [[NSNotificationCenter defaultCenter] postNotificationName:QBKOverlayMenuDidPerformUnfoldActionNotification 
-                                                            object:self 
+        [[NSNotificationCenter defaultCenter] postNotificationName:QBKOverlayMenuDidPerformUnfoldActionNotification
+                                                            object:self
                                                           userInfo:nil];
     }];
 }
@@ -186,7 +188,7 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
         
         // Notificación
         [[NSNotificationCenter defaultCenter] postNotificationName:QBKOverlayMenuDidPerformFoldActionNotification
-                                                            object:self 
+                                                            object:self
                                                           userInfo:nil];
     }];
 }
@@ -279,13 +281,13 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
     
     switch (_position) {
         case kQBKOverlayMenuViewPositionBottom:
-            frame = CGRectMake(QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS, [[self superview] bounds].size.height - (QBK_OVERLAY_MENU_VIEW_HEIGHT + QBK_OVERLAY_MENU_VIEW_BOTTOM_MARGIN + _offset.bottomOffset), [[self superview] bounds].size.width - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS * 2, QBK_OVERLAY_MENU_VIEW_HEIGHT);
+            frame = CGRectMake(([[self superview] bounds].size.width - (320.00f - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS)), [[self superview] bounds].size.height - (QBK_OVERLAY_MENU_VIEW_HEIGHT + QBK_OVERLAY_MENU_VIEW_BOTTOM_MARGIN + _offset.bottomOffset), 320.00f - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS * 2, QBK_OVERLAY_MENU_VIEW_HEIGHT);
             break;
         case kQBKOverlayMenuViewPositionTop:
-            frame = CGRectMake(QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS, QBK_OVERLAY_MENU_VIEW_TOP_MARGIN + _offset.topOffset, [[self superview] bounds].size.width - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS * 2, QBK_OVERLAY_MENU_VIEW_HEIGHT);
+            frame = CGRectMake(QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS, QBK_OVERLAY_MENU_VIEW_TOP_MARGIN + _offset.topOffset, 320.00f - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS * 2, QBK_OVERLAY_MENU_VIEW_HEIGHT);
             break;
         default:
-            frame = CGRectMake(QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS, [[self superview] bounds].size.height - (QBK_OVERLAY_MENU_VIEW_HEIGHT + QBK_OVERLAY_MENU_VIEW_BOTTOM_MARGIN + _offset.bottomOffset), [[self superview] bounds].size.width - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS * 2, QBK_OVERLAY_MENU_VIEW_HEIGHT);
+            frame = CGRectMake(QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS, [[self superview] bounds].size.height - (QBK_OVERLAY_MENU_VIEW_HEIGHT + QBK_OVERLAY_MENU_VIEW_BOTTOM_MARGIN + _offset.bottomOffset), 320.00f - QBK_OVERLAY_MENU_VIEW_HORIZONTAL_MARGINS * 2, QBK_OVERLAY_MENU_VIEW_HEIGHT);
             break;
     }
     

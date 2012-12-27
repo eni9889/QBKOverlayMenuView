@@ -28,8 +28,8 @@ typedef struct QBKOverlayMenuViewOffset QBKOverlayMenuViewOffset;
     UIImageView *_mainBackgroundImageView;  // imagen de fondo principal. Solo se muestra con el control desplegado.
 }
 
-@property (nonatomic, weak, readonly) id<QBKOverlayMenuViewDelegate> delegate;
-@property (nonatomic, weak) UIView *parentView;                                 // la vista que contendrá a este control
+@property (nonatomic, unsafe_unretained, readonly) id<QBKOverlayMenuViewDelegate> delegate;
+@property (nonatomic, unsafe_unretained) UIView *parentView;                                 // la vista que contendrá a este control
 @property (nonatomic, readonly) QBKOverlaMenuViewPosition position;
 @property (nonatomic, readonly) BOOL unfolded;                                  // el control está desplegado o no?
 @property (nonatomic, readonly) QBKOverlayMenuViewOffset offset;                // desplazamiento con respecto al borde inferior/superior del parentView
