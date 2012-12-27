@@ -9,8 +9,8 @@
 #import "QBKOverlayMenuView.h"
 
 #define QBK_OVERLAY_MENU_MAX_ADDITIONAL_BUTTONS 4               // sin usar por el momento
-#define QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH 22            // anchura del frame de los botones adicionales
-#define QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT 22           // altura del frame de los botones adicionales
+#define QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH 44            // anchura del frame de los botones adicionales
+#define QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT 44           // altura del frame de los botones adicionales
 #define QBK_OVERLAY_MENU_CONTENT_VIEW_PADDING 5                 // pading a los lados del contenedor de botones adicionales
 #define QBK_OVERLAY_MENU_VIEW_WIDTH 44                          // anchura del control cuando aparece como un botón flotante
 #define QBK_OVERLAY_MENU_VIEW_HEIGHT 44                         // altura del control cuando aparece como un botón flotante
@@ -207,10 +207,11 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
     CGFloat posXBoton = (QBK_OVERLAY_MENU_MAX_ADDITIONAL_BUTTONS - ([_additionalButtons count] + 1)) * tamHuecoBoton + posXBotonCentrado;
     
     // Configuramos el botón
-    UIButton *newButton = [[UIButton alloc] initWithFrame:CGRectMake(posXBoton, posYBotonCentrado, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT)];
-    [newButton setBackgroundImage:image forState:UIControlStateNormal];
+    UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom]; //[UIButton alloc] initWithFrame:CGRectMake(posXBoton, posYBotonCentrado, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT)];
+    [newButton setImage:image forState:UIControlStateNormal];
     [newButton setAutoresizingMask:UIViewAutoresizingNone];
     [newButton addTarget:self action:@selector(additionalButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [newButton setFrame: CGRectMake(posXBoton, posYBotonCentrado, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT)];
     
     // Registramos el nuevo botón
     [_additionalButtons insertObject:newButton atIndex:index];
