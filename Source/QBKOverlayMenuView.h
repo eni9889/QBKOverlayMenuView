@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKNumberBadgeView.h"
 
 typedef enum {
     kQBKOverlayMenuViewPositionDefault,
@@ -39,6 +40,7 @@ typedef struct QBKOverlayMenuViewOffset QBKOverlayMenuViewOffset;
 - (id)initWithDelegate:(id <QBKOverlayMenuViewDelegate>)delegate position:(QBKOverlaMenuViewPosition)position offset:(QBKOverlayMenuViewOffset)offset;
 - (id)initWithDelegate:(id <QBKOverlayMenuViewDelegate>)delegate position:(QBKOverlaMenuViewPosition)position;
 - (void)addButtonWithImage:(UIImage *)image index:(NSInteger)index;
+- (void)setBadgeValue:(int)value forButtonAtIndex:(NSInteger)index;
 @end
 
 @protocol QBKOverlayMenuViewDelegate <NSObject>
@@ -57,3 +59,12 @@ extern NSString *QBKOverlayMenuDidPerformFoldActionNotification;
 // Esta notitificación lleva una clave para el userInfo con el nombre "QBKButtonIndex" que albergará el index del botón pulsado (NSInteger)
 #define QBKButtonIndexKey @"QBKButtonIndex"
 extern NSString *QBKOverlayMenuDidActivateAdditionalButtonNotification;
+
+@interface UIBadgedButton : UIButton
+{
+    MKNumberBadgeView *badge;
+}
+
+@property (nonatomic, strong) MKNumberBadgeView *badge;
+
+@end

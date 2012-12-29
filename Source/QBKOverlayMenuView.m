@@ -28,6 +28,25 @@ NSString *QBKOverlayMenuDidActivateAdditionalButtonNotification = @"QBKOverlayMe
 NSString *QBKOverlayMenuDidPerformUnfoldActionNotification = @"QBKOverlayMenuDidPerformUnfoldActionNotification";
 NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPerformFoldActionNotification";
 
+@implementation UIBadgedButton
+@synthesize badge;
+
+-(id)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
+        [self setClipsToBounds:NO];
+        self.badge = [[MKNumberBadgeView alloc] initWithFrame:CGRectMake(QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH - (40/2), -9.0f, 40, 40)];
+        [self.badge setBackgroundColor:[UIColor clearColor]];
+        [self.badge setHideWhenZero:YES];
+        [self addSubview:badge];
+    }
+    
+    return self;
+}
+
+@end
+
 @interface QBKOverlayMenuView ()
 
 - (void)setupMainButton;
@@ -80,6 +99,7 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
         if (!_position) _position = kQBKOverlayMenuViewPositionDefault;
         _unfolded = NO;
         
+        [self setClipsToBounds:NO];
         self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
     }
     
@@ -194,6 +214,12 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
 }
 
 #pragma mark - Métodos "convenient"
+
+- (void)setBadgeValue:(int)value forButtonAtIndex:(NSInteger)index
+{
+    [[[_additionalButtons objectAtIndex:index] badge] setValue:value];
+}
+
 - (void)addButtonWithImage:(UIImage *)image index:(NSInteger)index
 {
     if (!_additionalButtons) _additionalButtons = [[NSMutableArray alloc] init];
@@ -207,7 +233,7 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
     CGFloat posXBoton = (QBK_OVERLAY_MENU_MAX_ADDITIONAL_BUTTONS - ([_additionalButtons count] + 1)) * tamHuecoBoton + posXBotonCentrado;
     
     // Configuramos el botón
-    UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom]; //[UIButton alloc] initWithFrame:CGRectMake(posXBoton, posYBotonCentrado, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT)];
+    UIBadgedButton *newButton = [UIBadgedButton buttonWithType:UIButtonTypeCustom]; //[UIButton alloc] initWithFrame:CGRectMake(posXBoton, posYBotonCentrado, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH, QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_HEIGHT)];
     [newButton setImage:image forState:UIControlStateNormal];
     [newButton setAutoresizingMask:UIViewAutoresizingNone];
     [newButton addTarget:self action:@selector(additionalButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
