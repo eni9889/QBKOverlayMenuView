@@ -36,7 +36,7 @@ NSString *QBKOverlayMenuDidPerformFoldActionNotification = @"QBKOverlayMenuDidPe
     if (self = [super initWithFrame:frame])
     {
         [self setClipsToBounds:NO];
-        self.badge = [[MKNumberBadgeView alloc] initWithFrame:CGRectMake(QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH - (40/2), -9.0f, 40, 40)];
+        self.badge = [[MKNumberBadgeView alloc] initWithFrame:CGRectMake(QBK_OVERLAY_MENU_ADDITIONAL_BUTTONS_WIDTH - (40/2), -6.0f, 40, 40)];
         [self.badge setBackgroundColor:[UIColor clearColor]];
         [self.badge setHideWhenZero:YES];
         [self.badge setValue:0];
